@@ -1,13 +1,14 @@
 import React from 'react'
-import { FaUserCricle } from "@react-icons/all-files/fa/FaUserCircle";
 
-export default function ContactCard({url=<FaUserCircle></FaUserCircle>,fname="first",lname="last",phone=5555555555,relation}) {
+export default function ContactCard({url="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpluspng.com%2Fimg-png%2Fpng-user-icon-circled-user-icon-2240.png&f=1&nofb=1&ipt=1862acc65294eed352047064d5e8fceb07c13ec09e16bbebe0576db61356bc47&ipo=images",fname="first",lname="last",phone=5555555555,relation="relation"}) {
   return (
-    <div className='border-2'>
-        <img src={url} alt="" />
-        <p>{fname} {lname}</p>
-        <a href="">{phone}</a>
+    <div className='border-2 w-24 flex flex-col items-center shadow-black shadow-md m-1 h-36'>
         
+        <img className='w-16' src={url} alt="" />
+        <p>{fname} {lname}</p>
+        <a cl href="">{phone}</a>
+        <p>{relation}</p>
+    
     </div>
   )
 }
