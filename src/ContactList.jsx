@@ -9,7 +9,7 @@ export default function ContactList({contacts}) {
     <ContactCard></ContactCard>
     <ContactCard></ContactCard>
     {contacts.map(e=>{
-       return <ContactCard url={e.pfp_url} fname={e.f_name} lname={e.l_name} phone={e.phone_number} relation={e.relationship.relation}></ContactCard>
+       return <ContactCard url={e.pfp_url} fname={e.f_name} lname={e.l_name} phone={e.phone_number} relation={e.relationship.relation} key={e.id}></ContactCard>
     })}
     
 

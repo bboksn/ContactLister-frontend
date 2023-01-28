@@ -4,7 +4,12 @@ import Filter from './Filter'
 import Forms from './Forms'
 
 export default function App() {
-  const [contacts,setContacts] =useState([{id:0,pfp_url:"",f_name:"",l_name:"",phone_number:0,relationship_id:0}]);
+  const [contacts,setContacts] =useState([{id:0,pfp_url:"",f_name:"",l_name:"",phone_number:0,relationship_id:0,relationship:{}}]);
+  //Want to set up a filter by relationship but am not sure on optimal way of going about it
+  //current ideas:
+  //option 1: filter data and map acordingly on client side
+  // option 2: ternary fetch request fetch/contacts for everything:fetch/contacts/relationship for query
+  //option 3: something more related to the backend controller that im not fully getting
   useEffect(() => {
     fetch('http://localhost:9292/contacts')
     .then((r)=>r.json())
