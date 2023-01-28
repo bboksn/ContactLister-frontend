@@ -1,6 +1,9 @@
 import React from 'react'
+import ContactList from './ContactList'
 export default function App() {
   return (
-    <div>App</div>  
+    <div>
+      <ContactList></ContactList>
+    </div>  
   )
 }
