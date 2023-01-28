@@ -3,7 +3,7 @@ import React from 'react'
 export default function ContactList() {
   return (
     <>
-    <div className='border-solid border-2 border-black w-60'>
+    <div className='border-solid border-4 border-black h-[700px] w-1/2 m-auto mt-10'>
 
     </div>
     </>
