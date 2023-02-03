@@ -22,7 +22,9 @@ export default function ContactForm({relationships}) {
            <label>Phone Number</label> <input onChange={fillForm} name='phone_number' className='border-black border-2 rounded-md' type="number" />
            <label>Relation</label>
            <select onChange={fillForm} name='relationship.relation'>
-           <option value="one">One</option>
+            {relationships.map(e=>{
+                return <option value={e.relation}>{e.relation}</option>
+            })}
            </select>
         </form>
     </div>
