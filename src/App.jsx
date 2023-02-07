@@ -4,34 +4,41 @@ import Filter from './Filter'
 import Forms from './Forms'
 
 export default function App() {
-  const [contacts,setContacts] =useState([{id:0,pfp_url:"",f_name:"",l_name:"",phone_number:0,relationship_id:0,relationship:{}}]);
-  const [relationships, setRelationships] = useState([{id:0,relation:"",desc:""}])
+  //const [contacts,setContacts] =useState([{id:0,pfp_url:"",f_name:"",l_name:"",phone_number:0,relationship_id:0,relationship:{}}]);
+  const [relationships, setRelationships] = useState([{id:0,relation:"",desc:"",contacts:[{}]}])
   //Want to set up a filter by relationship but am not sure on optimal way of going about it
   //current ideas:
   //option 1: filter data and map acordingly on client side
   // option 2: ternary fetch request fetch/contacts for everything:fetch/contacts/relationship for query
   //option 3: fetch every time option is selected by ${queryparam}
-  useEffect(() => {
+
+  function getData(){
+    /*
     fetch('http://localhost:9292/contacts')
     .then((r)=>r.json())
     .then(data=>{
       console.log(data)
       setContacts(data)
     })
+    // only fetch relationships and get data from there
     console.log(contacts)
+    */
     fetch('http://localhost:9292/relationships')
     .then(r=>r.json())
     .then(r=>{
       console.log(r)
       setRelationships(r)
     })
+  }
+  useEffect(() => {
+   getData()
   }, [])
   
   return (
     <div className=''>
       <h1 className='text-4xl mx-auto'>CONTACTS</h1>
       <Filter></Filter>
-      <ContactList contacts={contacts}></ContactList>
+      <ContactList getData={getData} contacts={relationships}></ContactList>
       <Forms relationships={relationships}></Forms>
     </div>  
   )
