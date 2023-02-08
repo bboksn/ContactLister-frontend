@@ -6,13 +6,8 @@ import Forms from './Forms'
 export default function App() {
   //const [contacts,setContacts] =useState([{id:0,pfp_url:"",f_name:"",l_name:"",phone_number:0,relationship_id:0,relationship:{}}]);
   const [relationships, setRelationships] = useState([{id:0,relation:"",desc:"",contacts:[{}]}])
-  //Want to set up a filter by relationship but am not sure on optimal way of going about it
-  //current ideas:
-  //option 1: filter data and map acordingly on client side
-  // option 2: ternary fetch request fetch/contacts for everything:fetch/contacts/relationship for query
-  //option 3: fetch every time option is selected by ${queryparam}
-
   function getData(){
+    //could also update data state on the client rather than fetching and setting data again though this keeps state consistant with the db
     /*
     fetch('http://localhost:9292/contacts')
     .then((r)=>r.json())
@@ -39,7 +34,7 @@ export default function App() {
       <h1 className='text-4xl mx-auto'>CONTACTS</h1>
       <Filter></Filter>
       <ContactList getData={getData} contacts={relationships}></ContactList>
-      <Forms relationships={relationships}></Forms>
+      <Forms relationships={relationships} getData={getData}></Forms>
     </div>  
   )
 }
