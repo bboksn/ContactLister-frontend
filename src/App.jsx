@@ -18,6 +18,7 @@ export default function App() {
     // only fetch relationships and get data from there
     console.log(contacts)
     */
+   //
     fetch('http://localhost:9292/relationships')
     .then(r=>r.json())
     .then(r=>{
