@@ -22,14 +22,14 @@ function handleEdit(e){
          {
             method:"PATCH",
             headers: {
-                'Content-Type': 'application/json',
+                'Content-type': 'application/json',
               },
             body: JSON.stringify(data),
         })
-        .then(r=>r.json())
+        /*.then(r=>r.json())
         .then(r=>{
             console.log(`posted ${r} !!`)
-        })
+        })*/
         getData()
         togForm()
 }
