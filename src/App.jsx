@@ -34,7 +34,7 @@ export default function App() {
     <div className=''>
       <h1 className='text-4xl mx-auto'>CONTACTS</h1>
       <Filter></Filter>
-      <ContactList getData={getData} contacts={relationships}></ContactList>
+      <ContactList getData={getData} relationships={relationships}></ContactList>
       <Forms relationships={relationships} getData={getData}></Forms>
     </div>  
   )
