@@ -1,6 +1,6 @@
 import {React,useState} from 'react'
 
-export default function CategoryForm() {
+export default function CategoryForm({getData}) {
  const [data,setData] = useState([{}]);
  function fillData(e){
   setData({
@@ -17,12 +17,13 @@ export default function CategoryForm() {
               },
             body: JSON.stringify(data),
         })
+        getData()
  }
   return (
     <div className='flex-grow'>CategoryForm
       <form onSubmit={handleData} className='flex flex-col'>
-        <label>Category:</label> <input name='relation' onChange={fillData} className='border-black border-2 rounded-md' type="text" />
-        <label>desc:</label> <input name='desc' onChange={fillData} className='border-black border-2 rounded-md' type="text" />
+        <label>Category:</label> <input onSubmit={(e)=>e.currentTarget.value=""} name='relation' onChange={fillData} className='border-black border-2 rounded-md' type="text" />
+        <label>desc:</label> <input name='desc' onSubmit={(e)=>e.currentTarget.value=""}  onChange={fillData} className='border-black border-2 rounded-md' type="text" />
         <input type="submit" value="" />
       </form>
     </div>
