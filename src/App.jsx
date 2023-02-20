@@ -33,7 +33,7 @@ export default function App() {
   return (
     <div className=''>
       <h1 className='text-4xl mx-auto'>CONTACTS</h1>
-      <Filter></Filter>
+     {/*<Filter></Filter>*/} 
       <ContactList getData={getData} relationships={relationships}></ContactList>
       <Forms relationships={relationships} getData={getData}></Forms>
     </div>  
