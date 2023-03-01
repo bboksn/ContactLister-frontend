@@ -7,6 +7,8 @@ run ```npm start``` to start and use the application
 ## Usage
 
 Input a new contact into the form
-Add categories using the category from on the right
-Delete contacts by clicking the x on a chosen contact card
-edit your contacts by clicking the edit button and saving the contacts.
+Add categories using the category from on the right.
+<br>
+Delete contacts by clicking the x on a chosen contact card.
+<br>
+Edit your contacts by clicking the edit button and saving the contacts.
