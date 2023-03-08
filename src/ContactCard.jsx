@@ -1,6 +1,6 @@
 import {React,useState} from 'react'
 //add ternary togle to edit form
-export default function ContactCard({relations,getData,id,url="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpluspng.com%2Fimg-png%2Fpng-user-icon-circled-user-icon-2240.png&f=1&nofb=1&ipt=1862acc65294eed352047064d5e8fceb07c13ec09e16bbebe0576db61356bc47&ipo=images",fname="first",lname="last",phone=5555555555,relation="relation",rid}) {
+export default function ContactCard({relationships,getData,setRelationships,id,url="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpluspng.com%2Fimg-png%2Fpng-user-icon-circled-user-icon-2240.png&f=1&nofb=1&ipt=1862acc65294eed352047064d5e8fceb07c13ec09e16bbebe0576db61356bc47&ipo=images",fname="first",lname="last",phone=5555555555,relation="relation",rid}) {
 const [formTogle, setFormTogle] = useState(true)   
 //const [data,setData] = useState([{pfp_url:"",f_name:"",l_name:"",phone_number:123,relationship_id:1}])
 
@@ -39,19 +39,21 @@ function handleEdit(e){
               relationship_id:relationship_Id
             }),
         })
-        /*.then(r=>r.json())
+        .then(r=>r.json())
         .then(r=>{
             console.log(`patched ${r} !!`)
-        })*/
+            setRelationships([...relationships,r])
+        })
         console.log(rid)
-        getData()
+     //   getData()
         togForm()
 }
 function handleDelete(){
         fetch(`http://localhost:9292/contacts/${id}`, {
             method:'DELETE'
         })
-        .then(getData())
+       // .then(getData())
+       //in the then remove the item from the state array
     }
   return (
     <div className='border-2 w-24 flex flex-col items-center shadow-black shadow-md m-1 h-52'>
@@ -73,7 +75,7 @@ function handleDelete(){
            <label htmlFor="">Phone</label> <input defaultValue={phone} onChange={(e)=>setPhone_Number(e.target.value)}  name="phone_number" className='w-20 border-2 border-dashed border-gray-500' type="number" />
            <select required name='relationship_id' onChange={(e)=>setRelationshipId(e.target.value)}>
             <option value={rid}>choose</option>
-            {relations.map(e=>{
+            {relationships.map(e=>{
                 return <option key={e.id}  value={e.id}>{e.relation}</option>
             })}
            </select>

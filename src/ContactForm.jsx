@@ -1,6 +1,6 @@
 import {React,useState} from 'react'
 
-export default function ContactForm({relationships,getData}) {
+export default function ContactForm({relationships,getData,setRelationships}) {
     //lift state for possible use elsewhere in the application maybe and rename to contactFormData 
     const [formData, setFormData] = useState([{pfp_url:"",f_name:"",l_name:"",phone_number:123,relationship_id:1}])
     function fillForm(e){
@@ -24,9 +24,12 @@ export default function ContactForm({relationships,getData}) {
         })
         .then(r=>r.json())
         .then(r=>{
+            
             console.log(`posted ${r} !!`)
+           // setRelationships([...relationships,/**contact to be added r */])
+           setRelationships([...relationships,relationships.contacts.push(r)])
         })
-        getData()
+        //getData()
     }
   return (
     <div className='border-2 border-black flex-grow'>

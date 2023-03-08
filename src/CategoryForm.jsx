@@ -1,6 +1,6 @@
 import {React,useState} from 'react'
 
-export default function CategoryForm({getData}) {
+export default function CategoryForm({getData,relationships,setRelationships}) {
  const [data,setData] = useState([{}]);
  function fillData(e){
   setData({
@@ -17,7 +17,10 @@ export default function CategoryForm({getData}) {
               },
             body: JSON.stringify(data),
         })
-        getData()
+        .then(r=>{
+            setRelationships([...relationships,r])
+        })
+        //getData()
  }
   return (
     <div className='flex-grow'>CategoryForm
