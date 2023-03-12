@@ -1,3 +1,4 @@
+import { type } from '@testing-library/user-event/dist/type'
 import {React,useState} from 'react'
 
 export default function ContactForm({relationships,getData,setRelationships}) {
@@ -11,10 +12,29 @@ export default function ContactForm({relationships,getData,setRelationships}) {
         })
     }
     function handleForm(e){
-        console.log(formData)
-        //post
         e.preventDefault()
-        fetch('http://localhost:9292/contacts',
+     //   console.log(formData)
+        //console.log(typeof formData.relationship_id)
+        const currentRelationship = relationships.find(relationObj=> relationObj.id  == formData.relationship_id)
+        console.log(currentRelationship)
+        const newContacts = [...currentRelationship.contacts,formData]
+        const newRelationship={...currentRelationship, contacts: newContacts}
+        const updatedRelationships = relationships.map(relationObj => relationObj.id == formData.relationship_id ? newRelationship : relationObj);
+        
+      
+      
+
+        //post
+        
+        
+        /*
+        -make a copy of the relationship
+        -go to the contacts array in the relationship obj 
+        -add the new contact object to the contacts array
+        -go to the relationships array 
+        -replace the old relationship object with the new relationship object
+        */
+       fetch('http://localhost:9292/contacts',
          {
             method:"POST",
             headers: {
@@ -26,9 +46,10 @@ export default function ContactForm({relationships,getData,setRelationships}) {
         .then(r=>{
             
             console.log(`posted ${r} !!`)
-           // setRelationships([...relationships,/**contact to be added r */])
-           setRelationships([...relationships,relationships.contacts.push(r)])
+           setRelationships(updatedRelationships);
+           
         })
+        
         //getData()
     }
   return (
@@ -43,6 +64,7 @@ export default function ContactForm({relationships,getData,setRelationships}) {
            <select name='relationship_id' onClick={fillForm}>
             <option value={0}>Choose</option>
             {relationships.map(e=>{
+                
                 return <option key={e.id}  value={e.id}>{e.relation}</option>
             })}
            </select>

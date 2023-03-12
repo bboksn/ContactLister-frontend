@@ -7,6 +7,7 @@ export default function ContactList({relationships,getData}) {
     <div className='border-solid border-4 border-black h-[700px] w-1/2 m-auto mt-10 mb-2 flex flex-wrap overflow-auto'>
     <ContactCard></ContactCard>
     {relationships.map(e=>{
+      console.log(e.contacts)
       let relation = e.relation;
       return e.contacts.map(c=>{
         return <ContactCard relations={relationships} id={c.id} url={c.pfp_url} fname={c.f_name} lname={c.l_name} phone={c.phone_number} relation={relation} key={c.id} rid={c.relationship_id}></ContactCard>
