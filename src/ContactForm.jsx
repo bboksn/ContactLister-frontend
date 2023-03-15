@@ -13,15 +13,7 @@ export default function ContactForm({relationships,getData,setRelationships}) {
     }
     function handleForm(e){
         e.preventDefault()
-     //   console.log(formData)
-        //console.log(typeof formData.relationship_id)
-        const currentRelationship = relationships.find(relationObj=> relationObj.id  == formData.relationship_id)
-        console.log(currentRelationship)
-        const newContacts = [...currentRelationship.contacts,formData]
-        const newRelationship={...currentRelationship, contacts: newContacts}
-        const updatedRelationships = relationships.map(relationObj => relationObj.id == formData.relationship_id ? newRelationship : relationObj);
-        
-      
+     
       
 
         //post
@@ -46,6 +38,16 @@ export default function ContactForm({relationships,getData,setRelationships}) {
         .then(r=>{
             
             console.log(`posted ${r} !!`)
+            //   console.log(formData)
+        //console.log(typeof formData.relationship_id)
+        const currentRelationship = relationships.find(relationObj=> relationObj.id  == r.relationship_id)
+        console.log(currentRelationship)
+        const newContacts = [...currentRelationship.contacts,r]
+        const newRelationship={...currentRelationship, contacts: newContacts}
+        const updatedRelationships = relationships.map(relationObj => relationObj.id == r.relationship_id ? newRelationship : relationObj);
+        
+      
+
            setRelationships(updatedRelationships);
            
         })

@@ -1,11 +1,14 @@
 import {React,useState} from 'react'
 
 export default function CategoryForm({getData,relationships,setRelationships}) {
- const [data,setData] = useState([{relation:"",desc:"",contacts:[]}]);
+ const [data,setData] = useState();
  function fillData(e){
   setData({
     ...data,
-    [e.currentTarget.name]:e.currentTarget.value})
+    [e.currentTarget.name]:e.currentTarget.value,
+    //contacts:[{}]
+  }
+    )
  }
  function handleData(e){
   //const rel = [...relationships,data]
@@ -19,9 +22,13 @@ export default function CategoryForm({getData,relationships,setRelationships}) {
             body: JSON.stringify(data),
         })
         .then(r=>r.json())
-        .then(r=>{
-            setRelationships([...relationships,r])
-            setData({ relation: "", desc: "", contacts: [] });
+        .then(rel=>{
+          //console.log("AHHH "+data.relation)
+         // console.log("AHHH "+data.desc)'
+         console.log("AHHH "+data.contacts)
+         console.log("rel "+ rel.relationship_id)
+           setRelationships([...relationships,rel])
+            
         })
         //getData()
  }

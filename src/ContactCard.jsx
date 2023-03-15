@@ -24,6 +24,11 @@ function handleEdit(e){
   
   //console.log(data)
         //patch
+       
+        //const updatedContact= {...currentContact,f_name:f_Name,l_name:l_Name,phone_number:phone_Number,relationship_id:relationship_Id}
+        //console.log(currentRelationship)
+       // console.log(currentContact)
+        
         e.preventDefault()
         fetch(`http://localhost:9292/contacts/${id}`,
          {
@@ -40,20 +45,39 @@ function handleEdit(e){
             }),
         })
         .then(r=>r.json())
-        .then(r=>{
-            console.log(`patched ${r} !!`)
-            setRelationships([...relationships,r])
+        .then(c=>{
+            console.log(`patched ${c} !!`)
+         
+        const currentRelationship = relationships.find(relationObj=> relationObj.id  == c.relationship_id)
+         const updatedContact = currentRelationship.contacts.map(contact=> contact.id == id ? c:contact)
+         const updatedRelationship ={...currentRelationship,contacts:updatedContact}
+         const updatedRelationships = relationships.map(relationshipObj=> relationshipObj.id == c.relationship_id ? updatedRelationship: relationshipObj)
+  
+           setRelationships(updatedRelationships)
         })
-        console.log(rid)
-     //   getData()
+
         togForm()
+        
 }
 function handleDelete(){
         fetch(`http://localhost:9292/contacts/${id}`, {
             method:'DELETE'
         })
-       // .then(getData())
+        .then(r=>r.json())
+        .then(c=>{
+
+          // .then(getData())
        //in the then remove the item from the state array
+       //filter contacts that dont have the id and replace 
+       //the contact we need to delete is the id
+       const currentRelationship = relationships.find(relationObj=> relationObj.id  == c.relationship_id)
+       const filteredContacts = currentRelationship.contacts.filter(contactObj=>contactObj.id !=id)
+       const updatedRelationship ={...currentRelationship,contacts:filteredContacts}
+       const updatedRelationships = relationships.map(relationshipObj=> relationshipObj.id == c.relationship_id ? updatedRelationship: relationshipObj)
+       setRelationships(updatedRelationships)
+        })
+       
+
     }
   return (
     <div className='border-2 w-24 flex flex-col items-center shadow-black shadow-md m-1 h-52'>
